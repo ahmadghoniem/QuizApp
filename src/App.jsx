@@ -1,77 +1,27 @@
 import React, { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import Question from "./Components/Question";
 import SkeletonTemplate from "./Components/SkeletonTemplate";
+import Checkbtn from "./Components/Checkbtn";
+import Homepage from "./Components/Homepage";
 function App() {
-  let noOfAnswers = 4;
-  const [start, setStart] = useState(true);
-  const [questions, setQuestions] = useState([
-    // {
-    //   question:
-    //     "In the movie &ldquo;The Iron Giant,&rdquo; this character is the protagonist.",
-    //   category: "Entertainment: Film",
-    //   difficulty: "medium",
-    //   correctAnswer: "XHogarth Hughes",
-    //   incorrectAnswers: ["Kent Mansley", "Dean McCoppin", "Annie Hughes"],
-    //   selectedAns: null,
-    //   isCorrect: false,
-    // },
-    // {
-    //   question:
-    //     "Which actor played the main character in the 1990 film &quot;Edward Scissorhands&quot;?",
-    //   category: "Entertainment: Film",
-    //   difficulty: "medium",
-    //   correctAnswer: "XJohnny Depp",
-    //   incorrectAnswers: [" Clint Eastwood", "Leonardo DiCaprio", "Ben Stiller"],
-    //   selectedAns: null,
-    //   isCorrect: false,
-    // },
-    // {
-    //   question:
-    //     "Leonardo Di Caprio won his first Best Actor Oscar for his performance in which film?",
-    //   category: "Entertainment: Film",
-    //   difficulty: "medium",
-    //   correctAnswer: "XThe Revenant",
-    //   incorrectAnswers: [
-    //     "The Wolf Of Wall Street",
-    //     "Shutter Island",
-    //     "Inception",
-    //   ],
-    //   selectedAns: null,
-    //   isCorrect: false,
-    // },
-    // {
-    //   question: "Who directed the movie &quot;Alien&quot;?",
-    //   category: "Entertainment: Film",
-    //   difficulty: "medium",
-    //   correctAnswer: "XRidley Scott",
-    //   incorrectAnswers: ["Christopher Nolan", "Michael Bay", "James Cameron"],
-    //   selectedAns: null,
-    //   isCorrect: false,
-    // },
-    // {
-    //   question:
-    //     "Which town is the setting for the Disney movie The Love Bug (1968)?",
-    //   category: "Entertainment: Film",
-    //   difficulty: "medium",
-    //   correctAnswer: "XSan Francisco",
-    //   incorrectAnswers: ["Los Angeles", "Sacramento", "San Jose"],
-    //   selectedAns: null,
-    //   isCorrect: false,
-    // },
-  ]);
-  const [difficulty, setDifficulty] = useState("easy");
+  let noOfAns = 4;
+
+  const [start, setStart] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [difficulty, setDifficulty] = useState("medium");
   const [isRevealed, setIsRevealed] = useState(false);
-  const [category, setCategory] = useState("films");
-  const [noOfQuestions, setNoOFQuestions] = useState(5);
-  // console.log(process.env.API_URL);
+  const [category, setCategory] = useState("10");
+  const [noOfQues, setnoOfQues] = useState(5);
   useEffect(() => {
-    // if (isRevealed) return;
+    if (isRevealed) return;
+    setQuestions([]);
     fetch(
-      "https://opentdb.com/api.php?amount=5&category=11&difficulty=medium&type=multiple"
+      `https://opentdb.com/api.php?amount=${noOfQues}&category=${category}&difficulty=${difficulty}&type=multiple`
     )
       .then((response) => response.json())
       .then((data) => {
-        let arr = data.results.map(function (e) {
+        let arr = data.results.map((e) => {
           let { category, difficulty, type, ...rest } = e; // execlude category and difficulty
           return {
             ...rest,
@@ -81,18 +31,14 @@ function App() {
         });
         setQuestions(arr);
       });
-  }, []);
+  }, [noOfQues, category, difficulty, isRevealed]);
 
-  function checkAnswers() {
-    setIsRevealed(true);
-  }
-
-  function getCorrectAnsCount() {
+  function getScore() {
     let number = 0;
     questions.forEach((e) => {
       if (e.isCorrect) number += 1;
     });
-    return number;
+    return `${number}/${noOfQues}`;
   }
   const quesElements = questions.map(function (questionObj, index) {
     return (
@@ -100,7 +46,6 @@ function App() {
         key={index}
         index={index}
         {...questionObj}
-        questions={questions}
         setQuestions={setQuestions}
         isRevealed={isRevealed}
       />
@@ -108,29 +53,51 @@ function App() {
   });
 
   return (
-    <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
-      <div>
-        {questions.length < 1 ? (
-          <SkeletonTemplate
-            noOfQuestions={noOfQuestions}
-            noOfAnswers={noOfAnswers}
-          />
-        ) : (
-          quesElements
-        )}
-      </div>
-      <div className="button-container">
-        {isRevealed && (
-          <p className="score">
-            You scored {getCorrectAnsCount()}/5 correct answers
-          </p>
-        )}
+    <>
+      {start ? (
+        <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
+          <div>
+            {questions.length < 1 ? (
+              <SkeletonTemplate noOfQues={noOfQues} noOfAns={noOfAns} />
+            ) : (
+              quesElements
+            )}
+          </div>
+          <div className="button-container">
+            {isRevealed && (
+              <p className="score">You scored {getScore()} correct answers</p>
+            )}
 
-        <button className="check-answers" onClick={checkAnswers}>
-          {!isRevealed ? "Check answers" : "Play again"}
-        </button>
-      </div>
-    </main>
+            <Checkbtn
+              isRevealed={isRevealed}
+              setIsRevealed={setIsRevealed}
+              questions={questions}
+            />
+            {isRevealed && (
+              <p
+                className="change-settings"
+                onClick={() => {
+                  setIsRevealed(false);
+                  setStart(false);
+                }}
+              >
+                change settings⚙️
+              </p>
+            )}
+          </div>
+        </main>
+      ) : (
+        <Homepage
+          setStart={setStart}
+          difficulty={difficulty}
+          category={category}
+          noOfQues={noOfQues}
+          setDifficulty={setDifficulty}
+          setCategory={setCategory}
+          setnoOfQues={setnoOfQues}
+        />
+      )}
+    </>
   );
 }
 export default App;

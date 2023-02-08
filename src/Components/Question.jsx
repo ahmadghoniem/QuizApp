@@ -34,6 +34,7 @@ function Question({
     setShuffledAns([...shuffleAnswers(correct_answer, incorrect_answers)]);
   }, []);
   function setSelectedAns(e) {
+    if (isRevealed) return; // so the user won't be able to highlight answer after he revealed them
     Array.from(e.currentTarget.parentElement.children).forEach((e) =>
       e.classList.remove("active")
     );
