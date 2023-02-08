@@ -27,7 +27,7 @@ body {
 } */
 .App-container {
   padding: 20px;
-  width: 65%;
+  width: 80%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -56,6 +56,7 @@ button {
   display: block;
   color: #293264;
   margin-bottom: 14px;
+  max-width: 80%;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
