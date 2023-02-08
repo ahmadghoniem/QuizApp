@@ -62,7 +62,7 @@ function App() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [category, setCategory] = useState("films");
   const [noOfQuestions, setNoOFQuestions] = useState(5);
-
+  console.log(process.env.API_URL);
   useEffect(() => {
     // if (isRevealed) return;
     fetch(
