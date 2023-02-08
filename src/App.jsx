@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Question from "./Components/Question";
 import SkeletonTemplate from "./Components/SkeletonTemplate";
 function App() {
+  let noOfAnswers = 4;
   const [start, setStart] = useState(true);
   const [questions, setQuestions] = useState([
     // {
@@ -62,7 +63,7 @@ function App() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [category, setCategory] = useState("films");
   const [noOfQuestions, setNoOFQuestions] = useState(5);
-  console.log(process.env.API_URL);
+  // console.log(process.env.API_URL);
   useEffect(() => {
     // if (isRevealed) return;
     fetch(
@@ -71,7 +72,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         let arr = data.results.map(function (e) {
-          let { category, difficulty, type, ...rest } = e;
+          let { category, difficulty, type, ...rest } = e; // execlude category and difficulty
           return {
             ...rest,
             selectedAns: null,
@@ -110,7 +111,10 @@ function App() {
     <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
       <div>
         {questions.length < 1 ? (
-          <SkeletonTemplate noOfQuestions={noOfQuestions} />
+          <SkeletonTemplate
+            noOfQuestions={noOfQuestions}
+            noOfAnswers={noOfAnswers}
+          />
         ) : (
           quesElements
         )}
