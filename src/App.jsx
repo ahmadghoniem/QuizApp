@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Question from "./Components/Question";
-
+import SkeletonTemplate from "./Components/SkeletonTemplate";
 function App() {
   const [start, setStart] = useState(true);
   const [questions, setQuestions] = useState([
@@ -64,64 +64,26 @@ function App() {
   const [noOfQuestions, setNoOFQuestions] = useState(5);
 
   useEffect(() => {
-    if (isRevealed) return;
+    // if (isRevealed) return;
     fetch(
       "https://opentdb.com/api.php?amount=5&category=11&difficulty=medium&type=multiple"
     )
       .then((response) => response.json())
       .then((data) => {
-        let arr = data.results.map(function ({
-          question,
-          category,
-          difficulty,
-          correct_answer,
-          incorrect_answers,
-        }) {
+        let arr = data.results.map(function (e) {
+          let { category, difficulty, type, ...rest } = e;
           return {
-            question: question,
-            category: category,
-            difficulty: difficulty,
-            correctAnswer: correct_answer,
-            incorrectAnswers: incorrect_answers,
+            ...rest,
             selectedAns: null,
             isCorrect: false,
           };
         });
-        console.log(arr);
         setQuestions(arr);
       });
   }, []);
 
-  function generateRandQuestions() {
-    let arr;
-    fetch(
-      "https://opentdb.com/api.php?amount=5&category=11&difficulty=medium&type=multiple"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        arr = data.results.map(function ({
-          question,
-          category,
-          difficulty,
-          correct_answer,
-          incorrect_answers,
-        }) {
-          return {
-            question: question,
-            category: category,
-            difficulty: difficulty,
-            correctAnswer: correct_answer,
-            incorrectAnswers: incorrect_answers,
-            selectedAns: null,
-            isCorrect: false,
-          };
-        });
-      });
-    return arr;
-  }
-
   function checkAnswers() {
-    setIsRevealed((prevstate) => !prevstate);
+    setIsRevealed(true);
   }
 
   function getCorrectAnsCount() {
@@ -131,30 +93,28 @@ function App() {
     });
     return number;
   }
-
-  const quesElements = questions.map(function (
-    { question, correctAnswer, incorrectAnswers, selectedAns, isCorrect },
-    index
-  ) {
+  const quesElements = questions.map(function (questionObj, index) {
     return (
       <Question
         key={index}
         index={index}
-        question={question}
+        {...questionObj}
         questions={questions}
-        correctAnswer={correctAnswer}
-        incorrectAnswers={incorrectAnswers}
         setQuestions={setQuestions}
         isRevealed={isRevealed}
-        selectedAns={selectedAns}
-        isCorrect={isCorrect}
       />
     );
   });
 
   return (
     <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
-      <div>{quesElements}</div>
+      <div>
+        {questions.length < 1 ? (
+          <SkeletonTemplate noOfQuestions={noOfQuestions} />
+        ) : (
+          quesElements
+        )}
+      </div>
       <div className="button-container">
         {isRevealed && (
           <p className="score">

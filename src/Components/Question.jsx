@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Interweave } from "interweave";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 // Interweave is a robust React library that can...
 
 // Safely render HTML without using dangerouslySetInnerHTML.
@@ -8,17 +11,16 @@ import { Interweave } from "interweave";
 
 function Question({
   question,
-  correctAnswer,
-  incorrectAnswers,
+  correct_answer,
+  incorrect_answers,
   setQuestions,
   index,
-  questions,
   isRevealed,
   selectedAns,
   isCorrect,
 }) {
-  function shuffleAnswers(correctAnswer, incorrectAnswers) {
-    let array = [...incorrectAnswers, correctAnswer];
+  function shuffleAnswers(correct_answer, incorrect_answers) {
+    let array = [...incorrect_answers, correct_answer];
 
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -28,8 +30,8 @@ function Question({
   }
   const [shuffledAns, setShuffledAns] = useState([]);
   useEffect(function () {
-    if (isRevealed) return;
-    setShuffledAns([...shuffleAnswers(correctAnswer, incorrectAnswers)]);
+    // if (isRevealed) return;
+    setShuffledAns([...shuffleAnswers(correct_answer, incorrect_answers)]);
   }, []);
   function setSelectedAns(e) {
     Array.from(e.currentTarget.parentElement.children).forEach((e) =>
@@ -37,25 +39,24 @@ function Question({
     );
     e.currentTarget.classList.add("active");
     let value = e.currentTarget.dataset.answercontent;
-    let index = e.currentTarget.dataset.questionindex;
+    let i = e.currentTarget.dataset.questionindex;
 
     setQuestions((prevState) => {
-      prevState[index] = {
-        ...prevState[index],
+      prevState[i] = {
+        ...prevState[i],
         selectedAns: value,
-        isCorrect: prevState[index].correctAnswer === value,
+        isCorrect: prevState[i].correct_answer === value,
       };
       return prevState;
     });
-    console.log(questions);
   }
-  let answersElements = shuffledAns.map(function (e) {
-    let name = isRevealed && e === selectedAns && !isCorrect ? "incorrect" : "";
+  let answersElements = shuffledAns.map(function (e, i) {
     return (
       <button
-        className={`${name} ${
-          e === correctAnswer && isRevealed ? "correct" : ""
-        }`}
+        key={i}
+        className={`${
+          isRevealed && e === selectedAns && !isCorrect ? "incorrect" : ""
+        } ${e === correct_answer && isRevealed ? "correct" : ""}`}
         data-answercontent={e}
         data-questionindex={index}
         onClick={setSelectedAns}
@@ -69,9 +70,7 @@ function Question({
     <>
       <div className="question-container">
         <Interweave className="question-title" content={question} />
-        <div className="answers-container" data-index={index}>
-          {answersElements}
-        </div>
+        <div className="answers-container">{answersElements}</div>
         <div className="solid"></div>
       </div>
     </>
