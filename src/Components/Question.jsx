@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Interweave } from "interweave";
 // Interweave is a robust React library that can...
 
@@ -26,10 +26,11 @@ function Question({
     }
     return array;
   }
-  const [shuffledAns, setShuffledAns] = useState(() => [
-    ...shuffleAnswers(correctAnswer, incorrectAnswers),
-  ]);
-
+  const [shuffledAns, setShuffledAns] = useState([]);
+  useEffect(function () {
+    if (isRevealed) return;
+    setShuffledAns([...shuffleAnswers(correctAnswer, incorrectAnswers)]);
+  }, []);
   function setSelectedAns(e) {
     Array.from(e.currentTarget.parentElement.children).forEach((e) =>
       e.classList.remove("active")

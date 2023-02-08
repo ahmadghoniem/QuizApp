@@ -64,6 +64,7 @@ function App() {
   const [noOfQuestions, setNoOFQuestions] = useState(5);
 
   useEffect(() => {
+    if (isRevealed) return;
     fetch(
       "https://opentdb.com/api.php?amount=5&category=11&difficulty=medium&type=multiple"
     )
@@ -86,17 +87,41 @@ function App() {
             isCorrect: false,
           };
         });
+        console.log(arr);
         setQuestions(arr);
       });
   }, []);
 
+  function generateRandQuestions() {
+    let arr;
+    fetch(
+      "https://opentdb.com/api.php?amount=5&category=11&difficulty=medium&type=multiple"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        arr = data.results.map(function ({
+          question,
+          category,
+          difficulty,
+          correct_answer,
+          incorrect_answers,
+        }) {
+          return {
+            question: question,
+            category: category,
+            difficulty: difficulty,
+            correctAnswer: correct_answer,
+            incorrectAnswers: incorrect_answers,
+            selectedAns: null,
+            isCorrect: false,
+          };
+        });
+      });
+    return arr;
+  }
+
   function checkAnswers() {
-    setIsRevealed(true);
-    //count no of correctAnswers
-    questions.forEach((e) => {
-      if (e.isCorrect) number += 1;
-    });
-    console.log(`${number}/5`);
+    setIsRevealed((prevstate) => !prevstate);
   }
 
   function getCorrectAnsCount() {
@@ -128,17 +153,19 @@ function App() {
   });
 
   return (
-    <main className="App-container">
-      <div className={isRevealed ? "revealed" : ""}>{quesElements}</div>
-      {}
-      <button
-        className="check-answers"
-        onClick={() => {
-          checkAnswers();
-        }}
-      >
-        {isRevealed ? `${getCorrectAnsCount()}/5` : "Check answers"}
-      </button>
+    <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
+      <div>{quesElements}</div>
+      <div className="button-container">
+        {isRevealed && (
+          <p className="score">
+            You scored {getCorrectAnsCount()}/5 correct answers
+          </p>
+        )}
+
+        <button className="check-answers" onClick={checkAnswers}>
+          {!isRevealed ? "Check answers" : "Play again"}
+        </button>
+      </div>
     </main>
   );
 }

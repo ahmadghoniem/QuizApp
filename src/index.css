@@ -19,16 +19,13 @@ body {
 }
 .App-container {
   padding: 20px;
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+
 /* Solid border */
 div.solid {
   border: 0.79px solid #dbdef0;
@@ -54,7 +51,7 @@ button {
   margin-bottom: 14px;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .answers-container {
@@ -62,14 +59,14 @@ button {
   justify-content: flex-start;
   gap: 15px;
   background-color: transparent;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .answers-container > button {
   font-family: "Inter";
   border: 0.8px solid #4d5b9e;
   border-radius: 8px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   padding: 4px 20px;
 }
@@ -84,6 +81,9 @@ button {
   color: #293264;
   transition: background 0.2s ease-out 0s;
   background-color: #d6dbf5;
+}
+.revealed .answers-container > button {
+  opacity: 0.6;
 }
 .answers-container > button.correct {
   border: 0.8px solid #94d7a2;
@@ -103,9 +103,31 @@ button {
   color: #f5f7fb;
   border-radius: 10px;
   padding: 15px 22px;
-  margin: 0 auto;
   border: none;
+  margin: 0 auto;
+  opacity: 1;
 }
-.revealed button {
-  opacity: 0.5;
+.revealed > .button-container {
+  margin: unset;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.button-container::after {
+  content: "";
+  flex: 1;
+}
+
+.score {
+  color: #293264;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  flex: 1;
 }
