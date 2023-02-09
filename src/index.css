@@ -17,20 +17,18 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-/* .App-container {
-  padding: 20px;
-  width: 60%;
-  margin: 0 auto;
+div#root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-} */
+  align-items: center;
+}
 .App-container {
   padding: 20px;
-  width: 80%;
+  width: 66%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 /* Solid border */
 div.solid {
@@ -74,7 +72,7 @@ button {
   border-radius: 8px;
   text-align: center;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   padding: 4px 20px;
 }
 .answers-container > button:hover {
@@ -105,7 +103,8 @@ button {
   background-color: #f8bcbc;
 }
 
-.check-answers {
+.check-answers,
+.landing-page button {
   background: #4d5b9e;
   color: #f5f7fb;
   border-radius: 10px;
@@ -120,6 +119,7 @@ button {
 .button-container {
   display: flex;
   flex-direction: row;
+  align-self: stretch;
   justify-content: space-between;
   margin: 0 auto;
 }
@@ -130,6 +130,16 @@ button {
   font-style: normal;
   font-weight: 700;
   font-size: 15.5px;
+}
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: "Inter";
+}
+.landing-page h3 {
+  font-family: "Karla";
 }
 .landing-page label {
   position: relative;

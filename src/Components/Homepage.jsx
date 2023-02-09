@@ -33,67 +33,69 @@ function Homepage({
           Quick and easy to play: Pick your categories and get quizzed about
           them
         </h3>
+        <div>
+          <Select
+            label="Difficulty level: "
+            stateToChange="difficulty"
+            options={[
+              { label: "Easy", value: "easy" },
+              { label: "Medium", value: "medium" },
+              { label: "Hard", value: "hard" },
+            ]}
+            handleChange={handleChange}
+            currentVal={difficulty}
+          />
+          <Select
+            label="Number of Questions: "
+            stateToChange="noOfQues"
+            options={[
+              {
+                label: 1,
+                value: 1,
+              },
+              {
+                label: 2,
+                value: 2,
+              },
+              {
+                label: 3,
+                value: 3,
+              },
+              {
+                label: 4,
+                value: 4,
+              },
+              {
+                label: 5,
+                value: 5,
+              },
+              {
+                label: 6,
+                value: 6,
+              },
+              {
+                label: 7,
+                value: 7,
+              },
+              {
+                label: 8,
+                value: 8,
+              },
+              {
+                label: 9,
+                value: 9,
+              },
+              {
+                label: 10,
+                value: 10,
+              },
+            ]} // [...Array(qUES+1).keys()].slice(1)
+            handleChange={handleChange}
+            currentVal={noOfQues}
+          />
+        </div>
         <Select
-          label="select difficulty !"
-          stateToChange="difficulty"
-          options={[
-            { label: "Easy", value: "easy" },
-            { label: "Medium", value: "medium" },
-            { label: "Hard", value: "hard" },
-          ]}
-          handleChange={handleChange}
-          currentVal={difficulty}
-        />
-        <Select
-          label="select no of Questions !"
-          stateToChange="noOfQues"
-          options={[
-            {
-              label: 1,
-              value: 1,
-            },
-            {
-              label: 2,
-              value: 2,
-            },
-            {
-              label: 3,
-              value: 3,
-            },
-            {
-              label: 4,
-              value: 4,
-            },
-            {
-              label: 5,
-              value: 5,
-            },
-            {
-              label: 6,
-              value: 6,
-            },
-            {
-              label: 7,
-              value: 7,
-            },
-            {
-              label: 8,
-              value: 8,
-            },
-            {
-              label: 9,
-              value: 9,
-            },
-            {
-              label: 10,
-              value: 10,
-            },
-          ]} // [...Array(qUES+1).keys()].slice(1)
-          handleChange={handleChange}
-          currentVal={noOfQues}
-        />
-        <Select
-          label="select category !"
+          label="Questions category: "
           stateToChange="category"
           options={[
             {

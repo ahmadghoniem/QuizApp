@@ -9,7 +9,9 @@ function Checkbtn({ isRevealed, setIsRevealed, questions }) {
     width: "140px",
   };
   return questions.length < 1 ? (
-    <Skeleton {...skeleProps} />
+    <span>
+      <Skeleton {...skeleProps} />{" "}
+    </span>
   ) : (
     <button
       className="check-answers"
