@@ -9,9 +9,9 @@ function App() {
 
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [difficulty, setDifficulty] = useState("medium");
+  const [difficulty, setDifficulty] = useState("easy");
   const [isRevealed, setIsRevealed] = useState(false);
-  const [category, setCategory] = useState("10");
+  const [category, setCategory] = useState(15);
   const [noOfQues, setnoOfQues] = useState(5);
   useEffect(() => {
     if (isRevealed) return;
