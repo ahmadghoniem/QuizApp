@@ -8,6 +8,13 @@ function Homepage({
   noOfQues,
   category,
 }) {
+  let styles = {
+    display: "flex",
+    alignSelf: "stretch",
+    justifyContent: "center",
+    gap: "10px",
+  };
+
   function handleChange(e) {
     let stateToChange = e.currentTarget.id;
     let value = e.currentTarget.value;
@@ -33,7 +40,7 @@ function Homepage({
           Quick and easy to play: Pick your categories and get quizzed about
           them
         </h3>
-        <div>
+        <div style={styles}>
           <Select
             label="Difficulty level: "
             stateToChange="difficulty"
@@ -204,6 +211,14 @@ function Homepage({
         />
 
         <button onClick={() => setStart(true)}>Start quiz</button>
+        <footer>
+          <span>
+            Made with❤️ by{" "}
+            <a href="https://twitter.com/ahmadghoniem_" target="_blank">
+              @ahmadghoniem_
+            </a>
+          </span>
+        </footer>
       </div>
     </>
   );

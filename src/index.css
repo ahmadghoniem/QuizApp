@@ -24,7 +24,7 @@ div#root {
 }
 .App-container {
   padding: 20px;
-  width: 66%;
+  width: 75%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -141,6 +141,11 @@ button {
 .landing-page h3 {
   font-family: "Karla";
 }
+.landing-page h1 {
+  margin: 0;
+  font-family: "Karla";
+  font-weight: 700;
+}
 .landing-page label {
   position: relative;
   display: inline-block;
@@ -193,4 +198,11 @@ button {
 }
 .change-settings:hover {
   color: #4d5b9e;
+}
+footer span {
+  text-align: center;
+  color: #57606a;
+}
+footer {
+  margin-top: 20px;
 }
