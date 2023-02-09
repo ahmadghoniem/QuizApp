@@ -5,7 +5,7 @@ function Checkbtn({ isRevealed, setIsRevealed, questions }) {
     baseColor: "#4d5b9e33",
     highlightColor: "#4d5b9e0a",
     borderRadius: "10px",
-    height: "50px",
+    height: "45px",
     width: "140px",
   };
   return questions.length < 1 ? (
