@@ -24,7 +24,7 @@ div#root {
 }
 .App-container {
   padding: 20px;
-  width: 75%;
+  width: 65%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +88,12 @@ button {
 }
 .revealed .answers-container > button {
   opacity: 0.6;
+  cursor: not-allowed;
+  color: #293264;
 }
+/* .revealed .answers-container > button:disabled {
+
+} */
 .answers-container > button.correct {
   border: 0.8px solid #94d7a2;
   color: #293264;

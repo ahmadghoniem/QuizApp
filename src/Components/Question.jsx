@@ -61,6 +61,7 @@ function Question({
         data-anscontent={e}
         data-quesindex={index}
         onClick={setSelectedAns}
+        disabled={isRevealed}
       >
         <Interweave content={e} />
       </button>

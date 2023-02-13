@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import Question from "./Components/Question";
 import SkeletonTemplate from "./Components/SkeletonTemplate";
 import Checkbtn from "./Components/Checkbtn";
@@ -11,18 +10,19 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [difficulty, setDifficulty] = useState("easy");
   const [isRevealed, setIsRevealed] = useState(false);
-  const [category, setCategory] = useState(15);
-  const [noOfQues, setnoOfQues] = useState(5);
+  const [category, setCategory] = useState("any"); //
+  const [noOfQues, setnoOfQues] = useState(5); // set prefernces into one state (TODO)
   useEffect(() => {
-    if (isRevealed) return;
+    if (isRevealed) return; // check against start so apicalls wont be repetitive when you change fields
     setQuestions([]);
+    let categoryQuery = category !== "any" ? `&category=${category}` : "";
     fetch(
-      `https://opentdb.com/api.php?amount=${noOfQues}&category=${category}&difficulty=${difficulty}&type=multiple`
+      `https://opentdb.com/api.php?amount=${noOfQues}${categoryQuery}&difficulty=${difficulty}&type=multiple`
     )
       .then((response) => response.json())
       .then((data) => {
         let arr = data.results.map((e) => {
-          let { category, difficulty, type, ...rest } = e; // execlude category and difficulty
+          let { category, difficulty, type, ...rest } = e; // execlude category and difficulty and type
           return {
             ...rest,
             selectedAns: null,
@@ -31,7 +31,8 @@ function App() {
         });
         setQuestions(arr);
       });
-  }, [noOfQues, category, difficulty, isRevealed]);
+  }, [isRevealed, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
+  // everytime they get changed but get fired whenever the user starts a new quiz with the same settings or with new ones
 
   function getScore() {
     let number = 0;
