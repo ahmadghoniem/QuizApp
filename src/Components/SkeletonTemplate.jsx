@@ -12,7 +12,13 @@ function SkeletonTemplate({ noOfQues, noOfAns }) {
     <div className="question-container">
       <span className="question-title">
         <Skeleton {...props} borderRadius="4px" height={20} width={600} />
-        <Skeleton {...props} borderRadius="4px" height={20} width={450} />
+        <Skeleton {...props} borderRadius="4px" height={20} width={400} />
+
+        {/* {~~(Math.random() * 2) ? (
+          <Skeleton {...props} borderRadius="4px" height={20} width={400} />
+        ) : (
+          ""
+        )} */}
       </span>
       <div className="answers-container">
         {[...Array(noOfAns)].map(() => (

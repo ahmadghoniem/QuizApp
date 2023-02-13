@@ -9,12 +9,18 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [isRevealed, setIsRevealed] = useState(false);
   const [preferences, setPreferences] = useState({
-    difficulty: "medium",
+    difficulty: "easy",
     category: "any",
     noOfQues: 5,
   });
 
   let { difficulty, category, noOfQues } = preferences;
+
+  ////////////////////////////////////////////////////
+  // change buttons with input type checkbox and use labels to look like buttons so you don't have to use js to remove active class
+  // add fav question and add another component to show favourite questions
+  // see if you can remove data-anscontent={e}
+  ///////////////////////////////////////////////////
 
   useEffect(() => {
     if (isRevealed) return; // if the user decided to play another game with the same preferences
@@ -38,7 +44,6 @@ function App() {
       });
   }, [isRevealed, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
   // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with new ones (start)
-
   function getScore() {
     let number = 0;
     questions.forEach((e) => {
@@ -73,7 +78,6 @@ function App() {
             {isRevealed && (
               <p className="score">{getScore()} correct answers</p>
             )}
-
             <Checkbtn
               isRevealed={isRevealed}
               setIsRevealed={setIsRevealed}

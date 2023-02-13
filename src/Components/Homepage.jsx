@@ -1,7 +1,6 @@
 import Select from "./Select";
 function Homepage({ setStart, preferences, setPreferences }) {
   let { difficulty, category, noOfQues } = preferences;
-  console.log(preferences, difficulty, category, noOfQues);
   let styles = {
     display: "flex",
     alignSelf: "stretch",

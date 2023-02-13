@@ -36,6 +36,7 @@ function Question({
       e.classList.remove("active")
     );
     e.currentTarget.classList.add("active");
+
     let value = e.currentTarget.dataset.anscontent;
     let i = e.currentTarget.dataset.quesindex;
 
@@ -45,7 +46,12 @@ function Question({
         selectedAns: value,
         isCorrect: prevState[i].correct_answer === value, // returns boolean to tell wether the selected answer is the correct one or not
       };
-      return prevState;
+      /*
+      /return prevState; 
+      React uses reference equality to determine if a state change should trigger a re-render.
+       When you return the same reference to the state, React will not trigger a re-render, even if the state's contents have changed. 
+       */
+      return [...prevState];
     });
   }
   let answersElements = shuffledAns.map(function (e, i) {

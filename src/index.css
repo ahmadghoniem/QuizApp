@@ -74,7 +74,7 @@ button {
   font-weight: 400;
   padding: 4px 20px;
 }
-.answers-container > button:hover {
+.answers-container > button:hover:enabled {
   border: 0.8px solid #d6dbf5;
   transition: background 0.2s ease-out 0s;
   background-color: #d6dbf5;
@@ -91,9 +91,10 @@ button {
   cursor: not-allowed;
   color: #293264;
 }
-/* .revealed .answers-container > button:disabled {
-
-} */
+.check-answers:disabled {
+  cursor: not-allowed;
+  background-color: #4d5b9eb0;
+}
 .answers-container > button.correct {
   border: 0.8px solid #94d7a2;
   color: #293264;
@@ -115,6 +116,7 @@ button {
   padding: 15px 22px;
   border: none;
   opacity: 1;
+  transition: background 0.2s ease-out 0s;
 }
 .revealed > .button-container {
   margin: unset;
