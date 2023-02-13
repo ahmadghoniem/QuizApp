@@ -1,13 +1,7 @@
 import Select from "./Select";
-function Homepage({
-  setStart,
-  setDifficulty,
-  setCategory,
-  setnoOfQues,
-  difficulty,
-  noOfQues,
-  category,
-}) {
+function Homepage({ setStart, preferences, setPreferences }) {
+  let { difficulty, category, noOfQues } = preferences;
+  console.log(preferences, difficulty, category, noOfQues);
   let styles = {
     display: "flex",
     alignSelf: "stretch",
@@ -18,28 +12,17 @@ function Homepage({
   function handleChange(e) {
     let stateToChange = e.currentTarget.id;
     let value = e.currentTarget.value;
-
-    switch (stateToChange) {
-      case "difficulty":
-        setDifficulty(value);
-        break;
-      case "noOfQues":
-        setnoOfQues(value);
-        break;
-      case "category":
-        setCategory(value);
-        break;
-    }
+    setPreferences((prevState) => ({
+      ...prevState,
+      [stateToChange]: value,
+    }));
   }
 
   return (
     <>
       <div className="landing-page">
         <h1>Quizzical</h1>
-        <h3>
-          Quick and easy to play: Pick your categories and get quizzed about
-          them
-        </h3>
+        <h3>Unleash Your Inner Nerd!</h3>
         <div style={styles}>
           <Select
             label="Difficulty level: "

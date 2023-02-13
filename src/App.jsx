@@ -5,15 +5,20 @@ import Checkbtn from "./Components/Checkbtn";
 import Homepage from "./Components/Homepage";
 function App() {
   let noOfAns = 4;
-
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [difficulty, setDifficulty] = useState("easy");
   const [isRevealed, setIsRevealed] = useState(false);
-  const [category, setCategory] = useState("any"); //
-  const [noOfQues, setnoOfQues] = useState(5); // set prefernces into one state (TODO)
+  const [preferences, setPreferences] = useState({
+    difficulty: "medium",
+    category: "any",
+    noOfQues: 5,
+  });
+
+  let { difficulty, category, noOfQues } = preferences;
+
   useEffect(() => {
-    if (isRevealed) return; // check against start so apicalls wont be repetitive when you change fields
+    if (isRevealed) return; // if the user decided to play another game with the same preferences
+    // he shouldn't get them immediately after he reveals the answers
     setQuestions([]);
     let categoryQuery = category !== "any" ? `&category=${category}` : "";
     fetch(
@@ -32,7 +37,7 @@ function App() {
         setQuestions(arr);
       });
   }, [isRevealed, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
-  // everytime they get changed but get fired whenever the user starts a new quiz with the same settings or with new ones
+  // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with new ones (start)
 
   function getScore() {
     let number = 0;
@@ -66,7 +71,7 @@ function App() {
           </div>
           <div className="button-container">
             {isRevealed && (
-              <p className="score">You scored {getScore()} correct answers</p>
+              <p className="score">{getScore()} correct answers</p>
             )}
 
             <Checkbtn
@@ -90,12 +95,8 @@ function App() {
       ) : (
         <Homepage
           setStart={setStart}
-          difficulty={difficulty}
-          category={category}
-          noOfQues={noOfQues}
-          setDifficulty={setDifficulty}
-          setCategory={setCategory}
-          setnoOfQues={setnoOfQues}
+          preferences={preferences}
+          setPreferences={setPreferences}
         />
       )}
     </>
