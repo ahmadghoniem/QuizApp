@@ -81,7 +81,6 @@ input[type="radio"] {
 }
 
 .answers-container > input[type="radio"]:enabled + label:hover {
-  border: 0.8px solid #d6dbf5;
   transition: all 0.15s ease-in;
   background-color: #d6dbf5;
   color: #293264;
@@ -91,7 +90,6 @@ input[type="radio"] {
 .answers-container > input[type="radio"]:checked + label {
   border: 0.8px solid #d6dbf5;
   color: #293264;
-  transition: all 0.25s ease-in;
   background-color: #d6dbf5;
 }
 .revealed .answers-container > label {
