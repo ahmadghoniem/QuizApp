@@ -88,103 +88,103 @@ function Homepage({ setStart, preferences, setPreferences }) {
           stateToChange="category"
           options={[
             {
-              label: "Any Category",
+              label: "Any Category 🤷‍♂️",
               value: "any",
             },
             {
-              label: "General Knowledge",
+              label: "General Knowledge 💡",
               value: "9",
             },
             {
-              label: "Entertainment: Books",
+              label: "Entertainment: Books 📚",
               value: "10",
             },
             {
-              label: "Entertainment: Film",
+              label: "Entertainment: Film 🎥",
               value: "11",
             },
             {
-              label: "Entertainment: Music",
+              label: "Entertainment: Music 🎵",
               value: "12",
             },
             {
-              label: "Entertainment: Musicals & Theatres",
+              label: "Entertainment: Musicals & Theatres 🎭",
               value: "13",
             },
             {
-              label: "Entertainment: Television",
+              label: "Entertainment: Television 📺",
               value: "14",
             },
             {
-              label: "Entertainment: Video Games",
+              label: "Entertainment: Video Games 🎮",
               value: "15",
             },
             {
-              label: "Entertainment: Board Games",
+              label: "Entertainment: Board Games 🎲",
               value: "16",
             },
             {
-              label: "Science & Nature",
+              label: "Science & Nature 🌿",
               value: "17",
             },
             {
-              label: "Science: Computers",
+              label: "Science: Computers 💻",
               value: "18",
             },
             {
-              label: "Science: Mathematics",
+              label: "Science: Mathematics ➗",
               value: "19",
             },
             {
-              label: "Mythology",
+              label: "Mythology 🐉",
               value: "20",
             },
             {
-              label: "Sports",
+              label: "Sports ⚽",
               value: "21",
             },
             {
-              label: "Geography",
+              label: "Geography 🌎",
               value: "22",
             },
             {
-              label: "History",
+              label: "History 📜",
               value: "23",
             },
             {
-              label: "Politics",
+              label: "Politics 🏛️",
               value: "24",
             },
             {
-              label: "Art",
+              label: "Art 🎨",
               value: "25",
             },
             {
-              label: "Celebrities",
+              label: "Celebrities 🌟",
               value: "26",
             },
             {
-              label: "Animals",
+              label: "Animals 🐾",
               value: "27",
             },
             {
-              label: "Vehicles",
+              label: "Vehicles 🚗",
               value: "28",
             },
             {
-              label: "Entertainment: Comics",
+              label: "Entertainment: Comics 🦸",
               value: "29",
             },
             {
-              label: "Science: Gadgets",
+              label: "Science: Gadgets 📱",
               value: "30",
             },
             {
-              label: "Entertainment: Japanese Anime & Manga",
+              label: "Entertainment: Japanese Anime & Manga 🎌",
               value: "31",
             },
             {
-              label: "Entertainment: Cartoon & Animations",
+              label: "Entertainment: Cartoon & Animations 🐰",
               value: "32",
             },
           ]}
