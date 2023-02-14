@@ -65,7 +65,12 @@ button {
   background-color: transparent;
   margin-bottom: 16px;
 }
-.answers-container > button {
+
+input[type="radio"] {
+  display: none;
+}
+
+.answers-container > label {
   font-family: "Inter";
   border: 0.8px solid #4d5b9e;
   border-radius: 8px;
@@ -74,19 +79,22 @@ button {
   font-weight: 400;
   padding: 4px 20px;
 }
-.answers-container > button:hover:enabled {
+
+.answers-container > input[type="radio"]:enabled + label:hover {
   border: 0.8px solid #d6dbf5;
-  transition: background 0.2s ease-out 0s;
+  transition: all 0.15s ease-in;
   background-color: #d6dbf5;
   color: #293264;
+  cursor: pointer;
 }
-.answers-container > button.active {
+
+.answers-container > input[type="radio"]:checked + label {
   border: 0.8px solid #d6dbf5;
   color: #293264;
-  transition: background 0.2s ease-out 0s;
+  transition: all 0.25s ease-in;
   background-color: #d6dbf5;
 }
-.revealed .answers-container > button {
+.revealed .answers-container > label {
   opacity: 0.6;
   cursor: not-allowed;
   color: #293264;
@@ -95,17 +103,20 @@ button {
   cursor: not-allowed;
   background-color: #4d5b9eb0;
 }
-.answers-container > button.correct {
+.answers-container > input[type="radio"] + label.correct {
   border: 0.8px solid #94d7a2;
   color: #293264;
   background-color: #94d7a2;
+  transition: all 0.25s ease-in;
+
   font-weight: 600;
   opacity: 1;
 }
-.answers-container > button.incorrect {
+.answers-container > input[type="radio"] + label.incorrect {
   border: 0.8px solid #f8bcbc;
   color: #293264;
   background-color: #f8bcbc;
+  transition: all 0.25s ease-in;
 }
 
 .check-answers,
@@ -116,7 +127,7 @@ button {
   padding: 15px 22px;
   border: none;
   opacity: 1;
-  transition: background 0.2s ease-out 0s;
+  transition: all 0.15s ease-in;
 }
 .revealed > .button-container {
   margin: unset;
@@ -184,15 +195,13 @@ button {
   pointer-events: none;
 }
 .landing-page label select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   padding: 0 30px 0 10px;
   border: 1px solid #e0e0e0;
   border-radius: 3px;
-  line-height: 36px;
   height: 36px;
   background: #fff;
+  font-family: "Inter";
   margin: 0 5px 5px 0;
 }
 .landing-page select::-ms-expand {

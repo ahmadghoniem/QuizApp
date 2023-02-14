@@ -32,19 +32,14 @@ function Question({
 
   function setSelectedAns(e) {
     if (isRevealed) return; // so the user won't be able to highlight answer after he revealed them
-    Array.from(e.currentTarget.parentElement.children).forEach((e) =>
-      e.classList.remove("active")
-    );
-    e.currentTarget.classList.add("active");
-
-    let value = e.currentTarget.dataset.anscontent;
-    let i = e.currentTarget.dataset.quesindex;
+    let [quesIndex, answIndex] = e.currentTarget.id.split("-");
 
     setQuestions((prevState) => {
-      prevState[i] = {
-        ...prevState[i],
-        selectedAns: value,
-        isCorrect: prevState[i].correct_answer === value, // returns boolean to tell wether the selected answer is the correct one or not
+      prevState[quesIndex] = {
+        ...prevState[quesIndex],
+        selectedAns: shuffledAns[answIndex],
+        isCorrect:
+          prevState[quesIndex].correct_answer === shuffledAns[answIndex], // returns boolean to tell wether the selected answer is the correct one or not
       };
       /*
       /return prevState; 
@@ -61,16 +56,20 @@ function Question({
       else if (e === correct_answer) className = "correct";
     }
     return (
-      <button
-        key={i}
-        className={className}
-        data-anscontent={e}
-        data-quesindex={index}
-        onClick={setSelectedAns}
-        disabled={isRevealed}
-      >
-        <Interweave content={e} />
-      </button>
+      <>
+        <input
+          key={i}
+          type="radio"
+          id={`${index}-${i}`}
+          name={`Q${index}`}
+          onChange={setSelectedAns}
+          disabled={isRevealed}
+        />
+
+        <label htmlFor={`${index}-${i}`} className={className}>
+          <Interweave content={e} />
+        </label>
+      </>
     );
   });
 

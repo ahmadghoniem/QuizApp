@@ -1,8 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 function Checkbtn({ isRevealed, setIsRevealed, questions }) {
-  console.log(questions);
-
   let skeleProps = {
     baseColor: "#4d5b9e33",
     highlightColor: "#4d5b9e0a",
