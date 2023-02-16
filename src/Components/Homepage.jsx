@@ -8,12 +8,6 @@ function Homepage({
   setStarredFlag,
 }) {
   let { difficulty, category, noOfQues } = preferences;
-  let styles = {
-    display: "flex",
-    alignSelf: "stretch",
-    justifyContent: "center",
-    gap: "10px",
-  };
 
   function handleChange(e) {
     let stateToChange = e.currentTarget.id;

@@ -3,7 +3,6 @@ import Question from "./Components/Question";
 import SkeletonTemplate from "./Components/SkeletonTemplate";
 import Checkbtn from "./Components/Checkbtn";
 import Homepage from "./Components/Homepage";
-import { nanoid } from "nanoid";
 
 function App() {
   let noOfAns = 4;

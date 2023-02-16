@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Interweave } from "interweave";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
 // Interweave is a robust React library that can safely render HTML without using dangerouslySetInnerHTML.
 // Safely strip HTML tags.

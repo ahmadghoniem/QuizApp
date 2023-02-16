@@ -251,7 +251,7 @@ input[type="radio"] {
   margin-top: 25px;
   align-items: center;
   gap: 5px;
-  border: solid 2px #d1dbe7;
+  border: solid 3px #dee2ee6e;
   border-radius: 8px;
   padding: 5px;
 }

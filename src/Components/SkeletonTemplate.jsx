@@ -10,7 +10,7 @@ function SkeletonTemplate({ noOfQues, noOfAns }) {
 
   let eles = [...Array(parseInt(noOfQues))].map(() => (
     <div className="question-container">
-      <div className="question-title">
+      <div style={{ marginBottom: "14px" }}>
         <Skeleton {...props} borderRadius="4px" height={20} width={600} />
         <Skeleton {...props} borderRadius="4px" height={20} width={450} />
 
