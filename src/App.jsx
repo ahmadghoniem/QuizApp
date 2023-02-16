@@ -9,6 +9,7 @@ function App() {
 
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [answerAll, setAnswerAll] = useState(true);
   const [starred, setStarred] = useState(
     () => JSON.parse(localStorage.getItem("starred")) || []
   );
@@ -35,9 +36,9 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         let arr = data.results.map((e) => {
-          let { type, ...rest } = e; // execlude type
+          // let { type, ...rest } = e; // execlude type
           return {
-            ...rest,
+            ...e,
             selectedAns: null,
             isCorrect: false,
           };
@@ -100,6 +101,7 @@ function App() {
               isRevealed={isRevealed}
               setIsRevealed={setIsRevealed}
               questions={questions}
+              answerAll={answerAll}
             />
             {isRevealed && (
               <p
@@ -122,6 +124,8 @@ function App() {
           starred={starred}
           setQuestions={setQuestions}
           setStarredFlag={setStarredFlag}
+          answerAll={answerAll}
+          setAnswerAll={setAnswerAll}
         />
       )}
     </>

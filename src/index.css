@@ -109,7 +109,6 @@ input[type="radio"] {
   border: 0.8px solid #94d7a2;
   color: #293264;
   background-color: #94d7a2;
-  transition: all 0.25s ease-in;
 
   font-weight: 600;
   opacity: 1;
@@ -118,7 +117,6 @@ input[type="radio"] {
   border: 0.8px solid #f8bcbc;
   color: #293264;
   background-color: #f8bcbc;
-  transition: all 0.25s ease-in;
 }
 
 .check-answers,

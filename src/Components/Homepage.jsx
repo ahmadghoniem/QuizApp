@@ -6,6 +6,8 @@ function Homepage({
   setQuestions,
   starred,
   setStarredFlag,
+  answerAll,
+  setAnswerAll,
 }) {
   let { difficulty, category, noOfQues } = preferences;
 
@@ -155,6 +157,19 @@ function Homepage({
           handleChange={handleChange}
           currentVal={category}
         />
+        <div style={{ display: "flex" }}>
+          <label htmlFor="answerAll">
+            answer all questions before revealing the answers:
+          </label>
+          <input
+            type="checkbox"
+            id="answerAll"
+            checked={answerAll}
+            onChange={(e) => {
+              setAnswerAll(e.currentTarget.checked);
+            }}
+          />
+        </div>
         <div style={{ display: "flex", gap: "5px" }}>
           <button
             onClick={() => {
