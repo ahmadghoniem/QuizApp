@@ -6,14 +6,19 @@ a {
 a:hover {
   color: #535bf2;
 }
-
+html {
+  min-height: 100%;
+  background-image: url("./assets/images/B.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 body {
   margin: 0;
   display: flex;
   place-items: center;
   justify-content: center;
   font-family: Karla;
-  background-image: url("./assets/images/B.svg");
   min-width: 320px;
   min-height: 100vh;
 }
@@ -51,7 +56,6 @@ button {
   font-family: "Karla";
   display: block;
   color: #293264;
-  margin-bottom: 14px;
   max-width: 80%;
   font-style: normal;
   font-weight: bold;
@@ -81,7 +85,7 @@ input[type="radio"] {
 }
 
 .answers-container > input[type="radio"]:enabled + label:hover {
-  transition: all 0.15s ease-in;
+  transition: all 0.1s ease-in;
   background-color: #d6dbf5;
   color: #293264;
   cursor: pointer;
@@ -153,7 +157,8 @@ input[type="radio"] {
   font-family: "Inter";
 }
 .landing-page h3 {
-  font-family: "Karla";
+  font-family: Karla;
+  margin: 0;
 }
 .landing-page h1 {
   margin: 0;
@@ -164,7 +169,7 @@ input[type="radio"] {
   position: relative;
   display: inline-block;
 }
-.landing-page label:before {
+/* .landing-page label:nth-child(2):before {
   content: "";
   height: 31px;
   position: absolute;
@@ -176,8 +181,8 @@ input[type="radio"] {
   border-bottom-right-radius: 3px;
   pointer-events: none;
   display: block;
-}
-.landing-page label:after {
+} */
+.landing-page label.select:after {
   content: " ";
   position: absolute;
   right: 15px;
@@ -205,11 +210,53 @@ input[type="radio"] {
 .landing-page select::-ms-expand {
   display: none;
 }
+
+.star {
+  display: block;
+  fill: #cdcdcd3d;
+  transition: fill 200ms;
+}
+.star svg {
+  height: 21.5px;
+  padding: 2px;
+  display: block;
+  cursor: pointer;
+}
+.star:hover {
+  display: block;
+  fill: #e2dede;
+  transition: fill 200ms;
+}
+
+.star.active {
+  fill: #ffa600;
+  animation: fav 600ms ease;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
 .change-settings {
   cursor: pointer;
 }
 .change-settings:hover {
   color: #4d5b9e;
+}
+.starred {
+  display: flex;
+  align-self: end;
+  margin-top: 25px;
+  align-items: center;
+  gap: 5px;
+  border: solid 2px #d1dbe7;
+  border-radius: 8px;
+  padding: 5px;
+}
+.starred .star svg {
+  cursor: default;
 }
 footer span {
   text-align: center;

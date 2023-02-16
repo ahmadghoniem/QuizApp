@@ -1,5 +1,12 @@
 import Select from "./Select";
-function Homepage({ setStart, preferences, setPreferences }) {
+function Homepage({
+  setStart,
+  preferences,
+  setPreferences,
+  setQuestions,
+  starred,
+  setStarredFlag,
+}) {
   let { difficulty, category, noOfQues } = preferences;
   let styles = {
     display: "flex",
@@ -22,67 +29,30 @@ function Homepage({ setStart, preferences, setPreferences }) {
       <div className="landing-page">
         <h1>Quizzical</h1>
         <h3>Unleash Your Inner Nerd!</h3>
-        <div style={styles}>
-          <Select
-            label="Difficulty level: "
-            stateToChange="difficulty"
-            options={[
-              { label: "Easy", value: "easy" },
-              { label: "Medium", value: "medium" },
-              { label: "Hard", value: "hard" },
-            ]}
-            handleChange={handleChange}
-            currentVal={difficulty}
-          />
-          <Select
-            label="Number of Questions: "
-            stateToChange="noOfQues"
-            options={[
-              {
-                label: 1,
-                value: 1,
-              },
-              {
-                label: 2,
-                value: 2,
-              },
-              {
-                label: 3,
-                value: 3,
-              },
-              {
-                label: 4,
-                value: 4,
-              },
-              {
-                label: 5,
-                value: 5,
-              },
-              {
-                label: 6,
-                value: 6,
-              },
-              {
-                label: 7,
-                value: 7,
-              },
-              {
-                label: 8,
-                value: 8,
-              },
-              {
-                label: 9,
-                value: 9,
-              },
-              {
-                label: 10,
-                value: 10,
-              },
-            ]} // [...Array(qUES+1).keys()].slice(1)
-            handleChange={handleChange}
-            currentVal={noOfQues}
+        <div style={{ display: "flex", gap: "5px" }}>
+          <label htmlFor="noOfQues">Questions number: {noOfQues}</label>
+
+          <input
+            type="range"
+            id="noOfQues"
+            onChange={handleChange}
+            min={1}
+            max={25}
+            step={1}
+            value={noOfQues}
           />
         </div>
+        <Select
+          label="Difficulty level: "
+          stateToChange="difficulty"
+          options={[
+            { label: "Easy", value: "easy" },
+            { label: "Medium", value: "medium" },
+            { label: "Hard", value: "hard" },
+          ]}
+          handleChange={handleChange}
+          currentVal={difficulty}
+        />
         <Select
           label="Questions category: "
           stateToChange="category"
@@ -191,8 +161,26 @@ function Homepage({ setStart, preferences, setPreferences }) {
           handleChange={handleChange}
           currentVal={category}
         />
-
-        <button onClick={() => setStart(true)}>Start quiz</button>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <button
+            onClick={() => {
+              setStart(true), setStarredFlag(false);
+            }}
+          >
+            Start a new quiz
+          </button>
+          {starred.length > 0 && (
+            <button
+              onClick={() => {
+                setStart(true);
+                setStarredFlag(true);
+                setQuestions([...starred]);
+              }}
+            >
+              Quiz with starred questions
+            </button>
+          )}
+        </div>
         <footer>
           <span>
             Made with❤️ by{" "}

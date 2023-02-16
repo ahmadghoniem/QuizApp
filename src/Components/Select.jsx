@@ -6,7 +6,7 @@ const Select = ({
   stateToChange,
 }) => {
   return (
-    <label htmlFor={stateToChange}>
+    <label className="select" htmlFor={stateToChange}>
       {label}
       <select id={stateToChange} value={currentVal} onChange={handleChange}>
         {options.map(function ({ label, value } = options) {
