@@ -63,7 +63,8 @@ function App() {
           return {
             ...e,
             selectedAns: null,
-            isCorrect: false,
+            isCorrect: false, // isCorrect can be removed and replaced by comparing selectedAns with correct_ans but it's better to keep it that way for
+            // readability
             key: nanoid(), // so if any change were happen to the UI ((ex)unstarred a question)
             // and the questions array got updated with the updated starred when the user decided to play again (isRevealed && starredFlag)
             // we won't run into bugs (using index as a key will cause bugs)
