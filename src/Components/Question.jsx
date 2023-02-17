@@ -56,13 +56,10 @@ function Question({
   }
   function checkStarred(index) {
     let q = questions[index];
-    let res = starred.some((e) => {
-      return e.question === q.question;
-    });
-    return res ? " active" : "";
+    let res = starred.find((e) => e.question === q.question);
+    return res !== undefined ? " active" : "";
   }
   function setSelectedAns(e) {
-    console.log(e.currentTarget.value);
     if (isRevealed) return; // so the user won't be able to highlight answer after he revealed them
     let [quesIndex, answIndex] = e.currentTarget.id.split("-");
     setQuestions((prevState) => {
