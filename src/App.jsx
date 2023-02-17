@@ -3,13 +3,13 @@ import Question from "./Components/Question";
 import SkeletonTemplate from "./Components/SkeletonTemplate";
 import Checkbtn from "./Components/Checkbtn";
 import Homepage from "./Components/Homepage";
-
+import { nanoid } from "nanoid";
 function App() {
   let noOfAns = 4;
 
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [answerAll, setAnswerAll] = useState(true);
+  const [answerAll, setAnswerAll] = useState(false);
   const [starred, setStarred] = useState(
     () => JSON.parse(localStorage.getItem("starred")) || []
   );
@@ -25,7 +25,30 @@ function App() {
   let { difficulty, category, noOfQues } = preferences;
 
   useEffect(() => {
-    if (isRevealed || starredFlag) return; // if the user decided to play another game with the same preferences
+    if (isRevealed || starredFlag) {
+      if (starredFlag && !isRevealed) {
+        // when the user plays again using starred questions we gotta reset the selected answer and isCorrect back to false
+        // setting the questions state with the starred that already has selectedAns as null and iscorrect to false
+        // will update the UI and since we don't have a unique key for each question
+        // will cause a problem you can use a unique key for the key using nanoid
+        //   setQuestions((prevState) => {
+        //     let arr;
+        //     // arr = prevState.map((e) => ({
+        //     //   ...e,
+        //     //   selectedAns: null,
+        //     //   isCorrect: false,
+        //     // }));
+        //     // return [...arr];
+        //   });
+        // }
+        if (starred.length !== 0) {
+          setQuestions([...starred]);
+        } else {
+          setStart(false);
+        }
+      }
+      return;
+    } // if the user decided to play another game with the same preferences
     // he shouldn't get them immediately after he reveals the answers
     setQuestions([]); // reset questions
 
@@ -41,6 +64,9 @@ function App() {
             ...e,
             selectedAns: null,
             isCorrect: false,
+            key: nanoid(), // so if any change were happen to the UI ((ex)unstarred a question)
+            // and the questions array got updated with the updated starred when the user decided to play again (isRevealed && starredFlag)
+            // we won't run into bugs (using index as a key will cause bugs)
           };
         });
         setQuestions(arr);
@@ -50,14 +76,14 @@ function App() {
   function getScore() {
     let number = 0;
     questions.forEach((e) => {
-      if (e.isCorrect) number += 1; // isCorrect?
+      if (e.isCorrect) number += 1;
     });
     return `${number}/${questions.length}`;
   }
   const quesElements = questions.map(function (questionObj, index) {
     return (
       <Question
-        key={index}
+        key={questionObj.key}
         index={index}
         questionObj={questionObj}
         setQuestions={setQuestions}
@@ -107,6 +133,7 @@ function App() {
               <p
                 className="change-settings"
                 onClick={() => {
+                  setStarredFlag(false);
                   setIsRevealed(false);
                   setStart(false);
                 }}

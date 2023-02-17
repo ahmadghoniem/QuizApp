@@ -159,7 +159,7 @@ function Homepage({
         />
         <div style={{ display: "flex" }}>
           <label htmlFor="answerAll">
-            answer all questions before revealing the answers:
+            Answer all questions before being able to reveal the answers:
           </label>
           <input
             type="checkbox"

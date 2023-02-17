@@ -8,15 +8,12 @@ function Checkbtn({ isRevealed, setIsRevealed, questions, answerAll }) {
     height: "45px",
     width: "140px",
   };
-  console.log(answerAll);
   function isThereNull() {
-    return questions.some(function (e) {
-      return e.selectedAns == null;
-    });
+    return questions.some((e) => e.selectedAns == null);
   }
   return questions.length < 1 ? (
     <span>
-      <Skeleton {...skeleProps} />{" "}
+      <Skeleton {...skeleProps} />
     </span>
   ) : (
     <button
