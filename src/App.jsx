@@ -50,7 +50,7 @@ function App() {
       return;
     } // if the user decided to play another game with the same preferences
     // he shouldn't get them immediately after he reveals the answers
-    setQuestions([]); // reset questions
+    if (questions.length !== 0) setQuestions([]); // reset questions
 
     let categoryQuery = category !== "any" ? `&category=${category}` : "";
     fetch(
@@ -72,8 +72,8 @@ function App() {
         });
         setQuestions(arr);
       });
-  }, [isRevealed, start, starredFlag]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
-  // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with new ones (start)
+  }, [isRevealed, starredFlag]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
+  // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed)
   function getScore() {
     let number = 0;
     questions.forEach((e) => {
@@ -134,7 +134,8 @@ function App() {
               <p
                 className="change-settings"
                 onClick={() => {
-                  setStarredFlag(false);
+                  setStarredFlag(false); // this should be there in case your homepage had some functions using starredflag so it won't be still set to true
+                  // if you were previously on take a quiz with starred ques
                   setIsRevealed(false);
                   setStart(false);
                 }}
