@@ -6,14 +6,13 @@ function Homepage({
   setQuestions,
   starred,
   setStarredFlag,
-  answerAll,
-  setAnswerAll,
 }) {
-  let { difficulty, category, noOfQues } = preferences;
+  let { difficulty, category, noOfQues, canRevealAnswers } = preferences;
 
   function handleChange(e) {
-    let stateToChange = e.currentTarget.id;
-    let value = e.currentTarget.value;
+    let { id, value, checked } = e.currentTarget;
+    let stateToChange = id;
+    value = stateToChange === "canRevealAnswers" ? checked : value; // checkbox
     setPreferences((prevState) => ({
       ...prevState,
       [stateToChange]: value,
@@ -163,11 +162,9 @@ function Homepage({
           </label>
           <input
             type="checkbox"
-            id="answerAll"
-            checked={answerAll}
-            onChange={(e) => {
-              setAnswerAll(e.currentTarget.checked);
-            }}
+            id="canRevealAnswers"
+            checked={canRevealAnswers}
+            onChange={handleChange}
           />
         </div>
         <div style={{ display: "flex", gap: "5px" }}>

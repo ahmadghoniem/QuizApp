@@ -9,7 +9,6 @@ function App() {
 
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [answerAll, setAnswerAll] = useState(false);
   const [starred, setStarred] = useState(
     () => JSON.parse(localStorage.getItem("starred")) || []
   );
@@ -20,9 +19,10 @@ function App() {
     difficulty: "easy",
     category: "any",
     noOfQues: 5,
+    canRevealAnswers: true,
   });
 
-  let { difficulty, category, noOfQues } = preferences;
+  let { difficulty, category, noOfQues, canRevealAnswers } = preferences;
 
   useEffect(() => {
     if (isRevealed || starredFlag) {
@@ -128,7 +128,7 @@ function App() {
               isRevealed={isRevealed}
               setIsRevealed={setIsRevealed}
               questions={questions}
-              answerAll={answerAll}
+              canRevealAnswers={canRevealAnswers}
             />
             {isRevealed && (
               <p
@@ -153,8 +153,6 @@ function App() {
           starred={starred}
           setQuestions={setQuestions}
           setStarredFlag={setStarredFlag}
-          answerAll={answerAll}
-          setAnswerAll={setAnswerAll}
         />
       )}
     </>

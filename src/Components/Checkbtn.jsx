@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-function Checkbtn({ isRevealed, setIsRevealed, questions, answerAll }) {
+function Checkbtn({ isRevealed, setIsRevealed, questions, canRevealAnswers }) {
   let skeleProps = {
     baseColor: "#4d5b9e33",
     highlightColor: "#4d5b9e0a",
@@ -19,7 +19,7 @@ function Checkbtn({ isRevealed, setIsRevealed, questions, answerAll }) {
     <button
       className="check-answers"
       onClick={() => setIsRevealed((prevState) => !prevState)}
-      disabled={answerAll && isThereNull()}
+      disabled={canRevealAnswers && isThereNull()}
     >
       {!isRevealed ? "Check answers" : "Play again"}
     </button>
