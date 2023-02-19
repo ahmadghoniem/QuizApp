@@ -26,6 +26,7 @@ function App() {
 
   useEffect(() => {
     if (isRevealed || starredFlag || (!start && !isRevealed)) {
+      //  (!start && !isRevealed) so it won't load the questions on the first mount and reloads on quiz start causing a UI bug
       if (starredFlag && !isRevealed) {
         // when the user plays again using starred questions we gotta reset the selected answer and isCorrect back to false
         // setting the questions state with the starred that already has selectedAns as null and iscorrect to false
