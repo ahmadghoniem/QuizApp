@@ -25,7 +25,7 @@ function App() {
   let { difficulty, category, noOfQues, canRevealAnswers } = preferences;
 
   useEffect(() => {
-    if (isRevealed || starredFlag) {
+    if (isRevealed || starredFlag || (!start && !isRevealed)) {
       if (starredFlag && !isRevealed) {
         // when the user plays again using starred questions we gotta reset the selected answer and isCorrect back to false
         // setting the questions state with the starred that already has selectedAns as null and iscorrect to false
@@ -72,8 +72,8 @@ function App() {
         });
         setQuestions(arr);
       });
-  }, [isRevealed, starredFlag]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
-  // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed)
+  }, [isRevealed, starredFlag, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
+  // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with other prefernces (start)
   function getScore() {
     let number = 0;
     questions.forEach((e) => {

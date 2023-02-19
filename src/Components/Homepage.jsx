@@ -157,7 +157,7 @@ function Homepage({
           currentVal={category}
         />
         <div style={{ display: "flex" }}>
-          <label htmlFor="answerAll">
+          <label htmlFor="canRevealAnswers">
             Answer all questions before being able to reveal the answers:
           </label>
           <input
