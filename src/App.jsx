@@ -54,6 +54,7 @@ function App() {
     if (questions.length !== 0) setQuestions([]); // reset questions
 
     let categoryQuery = category !== "any" ? `&category=${category}` : "";
+
     fetch(
       `https://opentdb.com/api.php?amount=${noOfQues}${categoryQuery}&difficulty=${difficulty}&type=multiple`
     )
@@ -73,8 +74,9 @@ function App() {
         });
         setQuestions(arr);
       });
-  }, [isRevealed, starredFlag, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
+  }, [isRevealed, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
   // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with other prefernces (start)
+  // starredflag isn't needed in the depencies array as it's set in the homepage only where start is equal to false
   function getScore() {
     let number = 0;
     questions.forEach((e) => {
