@@ -13,7 +13,6 @@ function App() {
     () => JSON.parse(localStorage.getItem("starred")) || []
   );
   const [starredFlag, setStarredFlag] = useState(false);
-
   const [isRevealed, setIsRevealed] = useState(false);
   const [preferences, setPreferences] = useState({
     difficulty: "easy",

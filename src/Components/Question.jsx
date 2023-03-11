@@ -30,9 +30,8 @@ function Question({
   }
   function starQuestion(e) {
     let qIndex = e.currentTarget.dataset.qindex;
-    let callbackFunc;
     let activeState = e.currentTarget.classList.toggle("active"); // true = active class has been added and viceversa
-    callbackFunc = (prevState) => {
+    let callbackFunc = (prevState) => {
       let arr;
       if (activeState) {
         // add the question to the starred array and localStorage
