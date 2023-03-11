@@ -102,6 +102,7 @@ input[type="radio"] {
   cursor: not-allowed;
   color: #293264;
 }
+
 .check-answers:disabled {
   cursor: not-allowed;
   background-color: #4d5b9eb0;
@@ -130,15 +131,12 @@ input[type="radio"] {
   opacity: 1;
   transition: all 0.15s ease-in;
 }
-.revealed > .button-container {
-  margin: unset;
-}
+
 .button-container {
   display: flex;
   flex-direction: row;
   align-self: stretch;
   justify-content: space-between;
-  margin: 0 auto;
 }
 
 .score {

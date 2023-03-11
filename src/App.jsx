@@ -76,12 +76,13 @@ function App() {
   }, [isRevealed, start]); // (noOfQues category, difficulty) were orignally there but were removed so an api request won't be fired
   // everytime they get changed but get fired whenever the user starts a new quiz with the same preferences(isRevealed) or with other prefernces (start)
   // starredflag isn't needed in the depencies array as it's set in the homepage only where start is equal to false
+
   function getScore() {
     let number = 0;
     questions.forEach((e) => {
       if (e.isCorrect) number += 1;
     });
-    return `${number}/${questions.length}`;
+    return isRevealed ? number : 0;
   }
   const quesElements = questions.map(function (questionObj, index) {
     return (
@@ -116,15 +117,20 @@ function App() {
       {start ? (
         <main className={`App-container ${isRevealed ? "revealed" : ""}`}>
           <div>
-            {questions.length < 1 ? (
-              <SkeletonTemplate noOfQues={noOfQues} noOfAns={noOfAns} />
-            ) : (
+            {!!questions.length ? (
               quesElements
+            ) : (
+              <SkeletonTemplate noOfAns={noOfAns} noOfQues={noOfQues} />
             )}
           </div>
-          <div className="button-container">
-            {isRevealed && (
-              <p className="score">{getScore()} correct answers</p>
+          <div
+            className="button-container"
+            style={{ margin: questions.length ? "unset" : "0 auto" }}
+          >
+            {!!questions.length && (
+              <p className="score">
+                {getScore()}/{questions.length} correct answers
+              </p>
             )}
             <Checkbtn
               isRevealed={isRevealed}
@@ -132,7 +138,7 @@ function App() {
               questions={questions}
               canRevealAnswers={canRevealAnswers}
             />
-            {isRevealed && (
+            {!!questions.length && (
               <p
                 className="change-settings"
                 onClick={() => {

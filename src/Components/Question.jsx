@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Interweave } from "interweave";
+import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 // Interweave is a robust React library that can safely render HTML without using dangerouslySetInnerHTML.
 // Safely strip HTML tags.
 // Automatic XSS and injection protection.
@@ -77,11 +79,11 @@ function Question({
     });
   }
   let answersElements = shuffledAns.map(function (e, i) {
-    let className;
-    if (isRevealed) {
-      if (e === selectedAns && !isCorrect) className = "incorrect";
-      else if (e === correct_answer) className = "correct";
-    }
+    let className = isRevealed
+      ? e === selectedAns && !isCorrect
+        ? "incorrect"
+        : e === correct_answer && "correct"
+      : "";
     return (
       <>
         <input
