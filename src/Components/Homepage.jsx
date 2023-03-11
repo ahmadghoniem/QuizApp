@@ -170,7 +170,7 @@ function Homepage({
         <div style={{ display: "flex", gap: "5px" }}>
           <button
             onClick={() => {
-              setStart(true), setStarredFlag(false);
+              setStart(true), setStarredFlag(false), setQuestions([]);
             }}
           >
             Start a new quiz

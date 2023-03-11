@@ -27,20 +27,20 @@ function App() {
     if (isRevealed || starredFlag || !start) {
       //  (!start) so it won't load the questions on the first mount and reloads on quiz start causing a UI bug
       if (starredFlag && !isRevealed) {
-        // when the user plays again using starred questions we gotta reset the selected answer and isCorrect back to false
-        // setting the questions state with the starred that already has selectedAns as null and iscorrect to false
-        // will update the UI and since we don't have a unique key for each question
-        // will cause a problem you can use a unique key for the key using nanoid
-        //   setQuestions((prevState) => {
-        //     let arr;
-        //     // arr = prevState.map((e) => ({
-        //     //   ...e,
-        //     //   selectedAns: null,
-        //     //   isCorrect: false,
-        //     // }));
-        //     // return [...arr];
-        //   });
-        // }
+        /* when the user plays again using starred questions we gotta reset the selected answer and isCorrect back to false
+        setting the questions state with the starred that already has selectedAns as null and iscorrect to false
+        will update the UI and since we don't have a unique key for each question
+        will cause a problem you can use a unique key for the key using nanoid
+          setQuestions((prevState) => {
+            let arr;
+            // arr = prevState.map((e) => ({
+            //   ...e,
+            //   selectedAns: null,
+            //   isCorrect: false,
+            // }));
+            // return [...arr];
+          });
+        } */
         if (starred.length !== 0) {
           setQuestions([...starred]);
         } else {
