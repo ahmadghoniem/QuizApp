@@ -38,6 +38,7 @@ div#root {
 /* Solid border */
 div.solid {
   border: 0.79px solid #dbdef0;
+  width: "600px";
 }
 button {
   border-radius: 8px;
