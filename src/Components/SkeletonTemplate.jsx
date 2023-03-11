@@ -2,7 +2,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function SkeletonTemplate({ noOfQues, noOfAns }) {
-  let eles = [...Array(parseInt(noOfQues))].map(() => (
+  let eles = [...Array(+noOfQues)].map(() => (
     <div className="question-container">
       <div style={{ marginBottom: "14px" }}>
         <Skeleton width={600} />
@@ -13,7 +13,7 @@ function SkeletonTemplate({ noOfQues, noOfAns }) {
           <Skeleton borderRadius="8px" height={25} width={85} />
         ))}
       </div>
-      <div className="solid" style={{ width: "600px" }}></div>
+      <div className="solid"></div>
     </div>
   ));
   return (
