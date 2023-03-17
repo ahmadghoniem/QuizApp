@@ -142,7 +142,8 @@ function App() {
               <p
                 className="change-settings"
                 onClick={() => {
-                  setStarredFlag(false); // this should be there in case your homepage had some functions using starredflag so it won't be still set to true
+                  setStarredFlag(false);
+                  // this should be there in case your homepage had some functions using starredflag so it won't be still set to true
                   // if you were previously on take a quiz with starred ques
                   setIsRevealed(false);
                   setStart(false);
